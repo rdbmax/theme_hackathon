@@ -19,7 +19,7 @@ Regles de code
 3. Les assets non compilés sont dans le dossier /assets
 3. Les assets compilés sont dans le dossier /build
 
-**Note:**
+> **Note:**
 Attention le projet utilise gulp, ne pas oublier de lancer:
 1. gulp install
 2. gulp sass
@@ -34,4 +34,3 @@ Todo
 5. placer l'article d'explcation du hackathon
 6. Placer le planning des deux journées
 7. Placer un formulaire OU un lien vers l'eventbrite
-  
