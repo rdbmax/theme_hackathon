@@ -21,7 +21,7 @@ Regles de code
 
 > **Note:**
 Attention le projet utilise gulp, ne pas oublier de lancer:
-1. gulp install
+1. npm install
 2. gulp sass
 
 Todo
