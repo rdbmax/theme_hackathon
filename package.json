@@ -1,0 +1,23 @@
+{
+  "name": "theme_hackathon",
+  "version": "1.0.0",
+  "description": "Welcome bienvenue au theme pour le hackathon !\r ====",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-sass": "^2.2.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sourcemaps": "^1.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdbmax/theme_hackathon.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
