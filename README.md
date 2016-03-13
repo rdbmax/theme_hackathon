@@ -9,6 +9,16 @@ Regles du repo
 2. Il faut faire une "pull request" sur le repo cité en 1
 3. Les commits doivent etre commentés avec un commentaire en anglais.
 
+Installation
+----
+
+1. Lancer gulp sass
+2. Lancer gulp js
+3. Créer un ou plusieurs 'speaker' (OBLIGATOIRE)
+4. Créer un ou plusieurs  'event', attention à bien entrer les valeurs start/end/order
+5. Enjoy
+
+
 
 Regles de code
 ----
