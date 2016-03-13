@@ -114,7 +114,7 @@ get_header(); ?>
 
                 ?>
         <div class="col-md-4 col-sm-6 feature">
-            <img src="<?php  echo wp_get_attachment_url( get_post_thumbnail_id($post->ID))?>" class="speaker-img">
+            <img src="<?php  echo wp_get_attachment_url( get_post_thumbnail_id($post->ID))?>" class="speaker-img animated bounce">
             <h3><?php the_title() ?></h3>
             <p><?php the_content() ?></p>
             <ul class="speaker-social">
@@ -160,18 +160,18 @@ get_header(); ?>
 	<!-- Start: Tickets -->
 	<div class="container-fluid tickets" id="tickets">
 		<div class="row me-row content-ct">
-			<h2 class="row-title">Buy Tickets</h2>
+			<h2 class="row-title">Votre place</h2>
 			<div class="col-md-4 col-sm-6 col-md-offset-2">
-				<h3>Early Bird Ticket</h3>
-				<p class="price">$399</p>
-				<p>All days entry pass for all the events.</p>
-				<a href="#" class="btn btn-lg btn-red">Buy <small>(6 remaining)</small></a>
+				<h3>Tickets pour participer</h3>
+				<p class="price">Gratuit</p>
+				<p>Réservez votre place pour participer au hackathon</p>
+				<a href="#" class="btn btn-lg btn-red">Commander</a>
 			</div>
 			<div class="col-md-4 col-sm-6">
-				<h3>Workshop Pass</h3>
-				<p class="price">$199</p>
-				<p>Entry pass for each workshop</p>
-				<a href="#" class="btn btn-lg btn-red">Buy <small>(42 remaining)</small></a>
+				<h3>Tickets pour la remise des prix</h3>
+				<p class="price">Gratuit</p>
+				<p>Réservez votre place pour assister à la remise des prix</p>
+				<a href="#" class="btn btn-lg btn-red">Commander</a>
 			</div>
 		</div>
 	</div>
