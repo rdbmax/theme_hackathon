@@ -32,5 +32,5 @@ Todo
 3. Uploader le theme
 4. Placer une image responsive fullwidth au top
 5. placer l'article d'explication du hackathon
-6. Placer le planning des deux journées
-7. Placer un formulaire OU un lien vers l'eventbrite
+6. Placer le planning des deux journées (Done)
+7. Lien vers l'eventbrite

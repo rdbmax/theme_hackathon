@@ -2,6 +2,28 @@
 
 get_header(); ?>
 
+<?php
+	$query = new WP_Query(array(
+		'post_type' => 'event',
+		'posts_per_page' => -1,
+		'order' => 'ASC'
+	));
+
+	$dates = array();
+
+	if ( $query->have_posts() ) {
+		while ($query->have_posts()) {
+			$query->the_post();
+
+			$dates[] = event_timing_get_meta( 'event_timing_date' );
+
+		}
+	};
+
+	$dates = array_unique( $dates );
+	wp_reset_postdata();
+?>
+
 	<body id="page-top" data-spy="scroll" data-target=".side-menu">
 	<nav class="side-menu">
 		<ul>
@@ -38,11 +60,37 @@ get_header(); ?>
 		<!-- Start: Header -->
 		<div class="row hero-header" id="home">
 			<div class="col-md-7">
-				<img src="<?php bloginfo('stylesheet_directory'); ?>/dist/image/logo_large.png" class="logo">
-				<h1>Attend the most awaited Conference of 2015</h1>
-				<h3>to start you up with your business!</h3>
-				<h4>20<sup>th</sup> to 22<sup>nd</sup>  October, 2015</h4>
-				<a href="#" class="btn btn-lg btn-red">Buy Tickets Now <span class="ti-arrow-right"></span></a>
+				<?php
+				$query = new WP_Query(array(
+					'post_type' => 'post',
+					'posts_per_page' => 1,
+					'order' => 'DSC'
+				));
+
+
+				if ( $query->have_posts() ) {
+					while ($query->have_posts()) {
+						$query->the_post();
+
+						?>
+						<img src="<?php bloginfo('stylesheet_directory'); ?>/dist/image/logo_large.png" class="logo">
+						<h1><?php the_title(); ?></h1>
+						<h3><?php the_content(); ?></h3>
+						<?php
+							$tabLength = count($dates);
+							$event_start = new \DateTime($dates[0]);
+							$event_end = new \DateTime( $dates[$tabLength-1] );
+						?>
+						<h4>Du <?php echo $event_start->format('d-m') ?> au <?php echo $event_end->format('d-m') ?></h4>
+						<a href="#tickets" class="btn btn-lg btn-red white-txt ">Réservez votre place<span class="ti-arrow-right"></span></a>
+
+						<?php
+					}
+				};
+
+				wp_reset_postdata();
+				?>
+
 
 			</div>
 			<div class="col-md-5 hidden-xs">
@@ -76,26 +124,7 @@ get_header(); ?>
 		<!-- Start: Speakers -->
 		<div class="row me-row content-ct speaker" id="speakers">
 			<h2 class="row-title">Meet the Speakers</h2>
-			<div class="col-md-4 col-sm-6 feature">
-				<img src="img/speaker-1.png" class="speaker-img">
-				<h3>Simon Collins</h3>
-				<p>Simon is designer and partner at Fictivekin and has worked in a variety of situations for bands, record labels, governments, polar explorers, and most other things...</p>
-				<ul class="speaker-social">
-					<li><a href="#"><span class="ti-facebook"></span></a></li>
-					<li><a href="#"><span class="ti-twitter-alt"></span></a></li>
-					<li><a href="#"><span class="ti-linkedin"></span></a></li>
-				</ul>
-			</div>
-			<div class="col-md-4 col-sm-6 feature">
-				<img src="img/speaker-2.png" class="speaker-img">
-				<h3>Stephanie Troeth</h3>
-				<p>Stephie is a user experience researcher and designer. In over 15 years of working on the web, she has worn many hats, including a product lead for a tech startup in publishing...</p>
-				<ul class="speaker-social">
-					<li><a href="#"><span class="ti-facebook"></span></a></li>
-					<li><a href="#"><span class="ti-twitter-alt"></span></a></li>
-					<li><a href="#"><span class="ti-linkedin"></span></a></li>
-				</ul>
-			</div>
+
 
         <?php
         // WP_Query arguments
@@ -176,28 +205,6 @@ get_header(); ?>
 		</div>
 	</div>
 	<!-- End: Tickets -->
-
-    <?php
-    $query = new WP_Query(array(
-        'post_type' => 'event',
-        'posts_per_page' => -1,
-        'order' => 'ASC'
-    ));
-
-    $dates = array();
-
-    if ( $query->have_posts() ) {
-        while ($query->have_posts()) {
-        $query->the_post();
-
-        $dates[] = event_timing_get_meta( 'event_timing_date' );
-
-        }
-    };
-
-    $dates = array_unique( $dates );
-    wp_reset_postdata();
-    ?>
 
     <div class="container">
         <div class="row me-row schedule" id="schedule">

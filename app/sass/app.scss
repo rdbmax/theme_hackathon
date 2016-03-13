@@ -3,3 +3,15 @@
         max-width: 300px;
     }
 }
+.white-txt{
+
+    border: 2px solid transparent;
+    &:hover, &:focus, &:active, &:visited{
+        color: #ffffff;
+    }
+    transition: all ease 1s;
+    &:hover{
+        border: 2px solid #dd5138;
+        background-color: #016cc7;
+    }
+}
