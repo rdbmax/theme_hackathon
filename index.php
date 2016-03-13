@@ -2,34 +2,304 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<body id="page-top" data-spy="scroll" data-target=".side-menu">
+	<nav class="side-menu">
+		<ul>
+			<li class="hidden active">
+				<a class="page-scroll" href="#page-top"></a>
+			</li>
+			<li>
+				<a href="#home" class="page-scroll">
+					<span class="menu-title">Home</span>
+					<span class="dot"></span>
+				</a>
+			</li>
+			<li>
+				<a href="#speakers" class="page-scroll">
+					<span class="menu-title">Speakers</span>
+					<span class="dot"></span>
+				</a>
+			</li>
+			<li>
+				<a href="#tickets" class="page-scroll">
+					<span class="menu-title">Buy Tickets</span>
+					<span class="dot"></span>
+				</a>
+			</li>
+			<li>
+				<a href="#schedule" class="page-scroll">
+					<span class="menu-title">Schedule</span>
+					<span class="dot"></span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="container-fluid">
+		<!-- Start: Header -->
+		<div class="row hero-header" id="home">
+			<div class="col-md-7">
+				<img src="<?php bloginfo('stylesheet_directory'); ?>/dist/image/logo_large.png" class="logo">
+				<h1>Attend the most awaited Conference of 2015</h1>
+				<h3>to start you up with your business!</h3>
+				<h4>20<sup>th</sup> to 22<sup>nd</sup>  October, 2015</h4>
+				<a href="#" class="btn btn-lg btn-red">Buy Tickets Now <span class="ti-arrow-right"></span></a>
 
-		<?php
-		if ( have_posts() ) :
+			</div>
+			<div class="col-md-5 hidden-xs">
+				<img src="<?php bloginfo('stylesheet_directory'); ?>/dist/image/rocket.png" class="rocket animated bounce">
+			</div>
+		</div>
+		<!-- End: Header -->
+	</div>
+	<div class="container">
+		<!-- Start: Desc -->
+		<div class="row me-row content-ct">
+			<h2 class="row-title">Why This Event Is Super Cool?</h2>
+			<div class="col-md-4 feature">
+				<span class="ti-ticket"></span>
+				<h3>Buy Early Bird Tickets</h3>
+				<p>Super cool discounts if you purchase early bird tickets now. Limited tickets available with some awesome perks and goodies!</p>
+			</div>
+			<div class="col-md-4 feature">
+				<span class="ti-microphone"></span>
+				<h3>Expert Speakers</h3>
+				<p>Best in class expert speakers who have extensive knowledge of the topic. All speakers are curated by the panel of experts.</p>
+			</div>
+			<div class="col-md-4 feature">
+				<span class="ti-world"></span>
+				<h3>People around the globe!</h3>
+				<p>Meet the people attending this event around the globe. This will be the best opportunity to meet and greet people from your industry.</p>
+			</div>
+		</div>
+		<!-- End: Desc -->
 
-			if ( is_home() && ! is_front_page() ) : ?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
+		<!-- Start: Speakers -->
+		<div class="row me-row content-ct speaker" id="speakers">
+			<h2 class="row-title">Meet the Speakers</h2>
+			<div class="col-md-4 col-sm-6 feature">
+				<img src="img/speaker-1.png" class="speaker-img">
+				<h3>Simon Collins</h3>
+				<p>Simon is designer and partner at Fictivekin and has worked in a variety of situations for bands, record labels, governments, polar explorers, and most other things...</p>
+				<ul class="speaker-social">
+					<li><a href="#"><span class="ti-facebook"></span></a></li>
+					<li><a href="#"><span class="ti-twitter-alt"></span></a></li>
+					<li><a href="#"><span class="ti-linkedin"></span></a></li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-sm-6 feature">
+				<img src="img/speaker-2.png" class="speaker-img">
+				<h3>Stephanie Troeth</h3>
+				<p>Stephie is a user experience researcher and designer. In over 15 years of working on the web, she has worn many hats, including a product lead for a tech startup in publishing...</p>
+				<ul class="speaker-social">
+					<li><a href="#"><span class="ti-facebook"></span></a></li>
+					<li><a href="#"><span class="ti-twitter-alt"></span></a></li>
+					<li><a href="#"><span class="ti-linkedin"></span></a></li>
+				</ul>
+			</div>
 
-			<?php
-			endif;
+        <?php
+        // WP_Query arguments
+        $args = array (
+            'post_type'              => array( 'speaker' ),
+            'post_status'            => array( 'publish' ),
+        );
 
-			while ( have_posts() ) : the_post();
+        // The Query
+        $query = new WP_Query( $args );
 
-				get_template_part( 'template-parts/content', get_post_format() );
+        // The Loop
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
 
-			endwhile;
+                ?>
+        <div class="col-md-4 col-sm-6 feature">
+            <img src="<?php  echo wp_get_attachment_url( get_post_thumbnail_id($post->ID))?>" class="speaker-img">
+            <h3><?php the_title() ?></h3>
+            <p><?php the_content() ?></p>
+            <ul class="speaker-social">
+                <?php if(speaker_social_get_meta( 'speaker_social_facebook' )) : ?>
+                <li>
+                    <a href="<?php echo speaker_social_get_meta( 'speaker_social_facebook' ) ?>"><span class="ti-facebook"></span>
+                    </a>
+                </li>
+                <?php   endif; ?>
 
-		else :
+                <?php if(speaker_social_get_meta( 'speaker_social_twitter' )) : ?>
+                    <li>
+                        <a href="<?php echo speaker_social_get_meta( 'speaker_social_twitter' ) ?>"><span class="ti-twitter-alt"></span></a>
+                    </li>
+                <?php   endif; ?>
 
-			get_template_part( 'template-parts/content', 'none' );
+                <?php if(speaker_social_get_meta( 'speaker_social_linkedin' )) : ?>
 
-		endif; ?>
+                <li><a href="<?php echo speaker_social_get_meta( 'speaker_social_linkedin' ) ?>"><span class="ti-linkedin"></span></a></li>
+                <?php   endif; ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+            </ul>
+        </div>
+
+                <?php
+            }
+        } else {
+            ?>
+            <div class="col-md-4 col-sm-6 feature">
+                Pas encore de conférenciers
+            </div>
+
+            <?php
+        }
+
+        // Restore original Post Data
+        wp_reset_postdata();
+        ?>
+		<!-- End: Speakers -->
+	    </div>
+    </div>
+
+	<!-- Start: Tickets -->
+	<div class="container-fluid tickets" id="tickets">
+		<div class="row me-row content-ct">
+			<h2 class="row-title">Buy Tickets</h2>
+			<div class="col-md-4 col-sm-6 col-md-offset-2">
+				<h3>Early Bird Ticket</h3>
+				<p class="price">$399</p>
+				<p>All days entry pass for all the events.</p>
+				<a href="#" class="btn btn-lg btn-red">Buy <small>(6 remaining)</small></a>
+			</div>
+			<div class="col-md-4 col-sm-6">
+				<h3>Workshop Pass</h3>
+				<p class="price">$199</p>
+				<p>Entry pass for each workshop</p>
+				<a href="#" class="btn btn-lg btn-red">Buy <small>(42 remaining)</small></a>
+			</div>
+		</div>
+	</div>
+	<!-- End: Tickets -->
+
+    <?php
+    $query = new WP_Query(array(
+        'post_type' => 'event',
+        'posts_per_page' => -1,
+        'order' => 'ASC'
+    ));
+
+    $dates = array();
+
+    if ( $query->have_posts() ) {
+        while ($query->have_posts()) {
+        $query->the_post();
+
+        $dates[] = event_timing_get_meta( 'event_timing_date' );
+
+        }
+    };
+
+    $dates = array_unique( $dates );
+    wp_reset_postdata();
+    ?>
+
+    <div class="container">
+        <div class="row me-row schedule" id="schedule">
+            <h2 class="row-title content-ct">Planning des évènements</h2>
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <?php foreach($dates as $key => $date): ?>
+                    <?php $dateObject = new \DateTime($date);?>
+                    <li role="presentation">
+                        <a href="#day-<?php echo ($key + 1) ?>" aria-controls="home" role="tab" data-toggle="tab">
+                            Journée  <?php echo ($key + 1) ?> <small class="hidden-xs">( <?php echo $dateObject->format('d-m-Y') ?>)</small>
+                        </a>
+                    </li>
+
+                <?php endforeach; ?>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+					<?php if(count($dates) > 0 ) : ?>
+                    <?php foreach($dates as $key=>$date): ?>
+
+                        <div role="tabpanel" class="tab-pane fade in <?php if($key == 0){ echo 'active';} ?>" id="day-<?php echo ($key + 1) ?>">
+                            <div class="row">
+                                <?php
+                                $args = array (
+                                    'post_type'              => array( 'event' ),
+                                    'post_status'            => array( 'publish' ),
+                                    'meta_query'             => array(
+                                        array(
+                                            'key'       => 'event_timing_date',
+                                            'value'     => $date,
+                                            'compare'   => '=',
+                                            'type'      => 'DATETIME',
+                                        ),
+                                    ),
+									'order'		=> 'ASC',
+									'orderby'	=> 'event_timing_order',
+
+                                );
+
+                                // The Query
+                                $query = new WP_Query( $args );
+
+                                // The Loop
+                                if ( $query->have_posts() ) {
+                                    while ( $query->have_posts() ) {
+                                        $query->the_post();
+                                        ?>
+                                        <div class="col-md-6">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" src="<?php  echo wp_get_attachment_url( get_post_thumbnail_id($post->ID))?>" alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+													<?php
+													$start = event_timing_get_meta( 'event_timing_start' );
+													$end = event_timing_get_meta( 'event_timing_end' );
+													?>
+													<?php if(isset($start) && isset($end) ): ?>
+                                                    <h4 class="media-heading">De <?php echo $start?> à  <?php echo $end?></h4>
+													<?php else: ?>
+													<h4 class="media-heading">Pas encore d'horraires</h4>
+													<?php endif; ?>
+
+													<?php if(get_the_title()) : ?>
+
+														<h5><?php echo the_title()?></h5>
+													<?php else: ?>
+														<h4 class="media-heading">Pas encore de titre</h4>
+													<?php endif; ?>
+
+													<?php if(get_the_content()) : ?>
+														<p><?php echo the_content(); ?></p>
+													<?php else: ?>
+														<p class="media-heading">Pas encore de description</p>
+													<?php endif; ?>
+
+                                                </div>
+                                            </div>
+                                        </div><!-- single event -->
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+									Pas de description disponible pour cette journée, revenez plus tard.
+                                    <?php
+                                }
+
+                                // Restore original Post Data
+                                wp_reset_postdata();
+                                ?>
+                            </div>
+                        </div> <!-- tab panel-->
+                    <?php endforeach; ?>
+					<?php endif; ?>
+                </div> <!-- tab content-->
+            </div>
+        </div>
+    </div><!--end schedule -->
 
 <?php
 get_footer();
