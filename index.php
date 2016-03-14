@@ -20,7 +20,7 @@ get_header(); ?>
 		}
 	};
 
-	$dates = array_unique( $dates );
+	$dates = array_values(array_unique( $dates ));
 	wp_reset_postdata();
 ?>
 
@@ -82,7 +82,7 @@ get_header(); ?>
 							$event_end = new \DateTime( $dates[$tabLength-1] );
 						?>
 						<h4>Du <?php echo $event_start->format('d-m') ?> au <?php echo $event_end->format('d-m') ?></h4>
-						<a href="#tickets" class="btn btn-lg btn-red white-txt ">Réservez votre place<span class="ti-arrow-right"></span></a>
+						<a href="#tickets" class="btn btn-lg btn-red white-txt page-scroll">Réservez votre place<span class="ti-arrow-right"></span></a>
 
 						<?php
 					}
