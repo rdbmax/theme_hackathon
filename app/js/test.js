@@ -1,19 +1,14 @@
-console.log('Ok');
-alert('ok');
-
-//babel
-
-function fibonacci(n) {
-  let previous = 0;
-  let current = 1;
-
-  for(let i = 0; i < n; i += 1) {
-    let temp = previous;
-    previous = current;
-    current = temp + current;
-  }
-
-  return current;
-}
-
-console.log(fibonacci(8));
+$(function() {
+    $('a.page-scroll').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
+    });
+});
