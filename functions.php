@@ -405,12 +405,11 @@ add_action( 'save_post', 'event_timing_save' );
 
 
 /**
- * FOOTER widget
+ * Contat form hooks
  */
 
- /*
-  *  <a class="twitter-timeline"  href="https://twitter.com/SiliconBanlieue" data-widget-id="577833477707571201">
-  * Tweets de @SiliconBanlieue
-  * </a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  */
+add_filter( 'wpcf7_form_class_attr', 'custom_custom_form_class_attr' );
+function custom_custom_form_class_attr( $class ) {
+    $class .= ' form-horizontal';
+    return $class;
+}
