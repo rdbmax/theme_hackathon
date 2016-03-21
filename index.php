@@ -73,7 +73,7 @@ get_header(); ?>
 						$query->the_post();
 
 						?>
-						<img src="<?php bloginfo('stylesheet_directory'); ?>/dist/image/logo_large.png" class="logo">
+						<img src="<?php bloginfo('stylesheet_directory'); ?>/dist/image/logo.png" class="logo">
 						<h1><?php the_title(); ?></h1>
 						<h3><?php the_content(); ?></h3>
 						<?php
