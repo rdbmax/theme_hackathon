@@ -38,7 +38,7 @@ get_header(); ?>
 			</li>
 			<li>
 				<a href="#speakers" class="page-scroll">
-					<span class="menu-title">Speakers</span>
+					<span class="menu-title">Les intervenants</span>
 					<span class="dot"></span>
 				</a>
 			</li>
@@ -123,7 +123,7 @@ get_header(); ?>
 
 		<!-- Start: Speakers -->
 		<div class="row me-row content-ct speaker" id="speakers">
-			<h2 class="row-title">Meet the Speakers</h2>
+			<h2 class="row-title">Les intervenants</h2>
 
 
         <?php
@@ -194,13 +194,21 @@ get_header(); ?>
 				<h3>Tickets pour participer</h3>
 				<p class="price">Gratuit</p>
 				<p>Réservez votre place pour participer au hackathon</p>
-				<a href="#" class="btn btn-lg btn-red">Commander</a>
+				<?php if( just_variable( "url eventbrite event", FALSE ) != ''): ?>
+					<a href="<?php just_variable( "url eventbrite event" ) ?>" class="btn btn-lg btn-red">Commander</a>
+				<?php else: ?>
+					<a href="#" class="btn btn-lg btn-red">Rajouter l'eventbrite</a>
+				<?php endif; ?>
 			</div>
 			<div class="col-md-4 col-sm-6">
 				<h3>Tickets pour la remise des prix</h3>
 				<p class="price">Gratuit</p>
 				<p>Réservez votre place pour assister à la remise des prix</p>
-				<a href="#" class="btn btn-lg btn-red">Commander</a>
+				<?php if( just_variable( 'url eventbrite conference', FALSE ) != ''): ?>
+					<a href="<?php just_variable('url eventbrite conference' ) ?>" class="btn btn-lg btn-red">Commander</a>
+				<?php else: ?>
+					<a href="#" class="btn btn-lg btn-red">Rajouter l'eventbrite</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
