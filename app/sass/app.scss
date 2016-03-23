@@ -1,6 +1,21 @@
+@import "../../lib/fonts/hackathon-d16e343c1e06aa84a00ca8bc9ecbccea/font/_flaticon.scss";
+
+/// Mixin printing a linear-gradient
+/// as well as a plain color fallback
+/// and the `-webkit-` prefixed declaration
+/// @access public
+/// @param {Keyword | Angle} $direction - Linear gradient direction
+/// @param {Arglist} $color-stops - List of color-stops composing the gradient
+@mixin linear-gradient($direction, $color-stops...) {
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+
 .hero-header{
   color: black;
   background-color: #CCC;
+  @include linear-gradient(45deg, whitesmoke, #64ADDB);
     .logo{
         max-width: 300px;
     }
@@ -20,5 +35,22 @@
 .wpcf7-form{
     input[type="text"]{
         width: 100%;
+    }
+}
+
+.whyItsSuperCool i {
+    font-size: 5em;
+    color: #016cc7;
+}
+
+.twitter-timeline {
+    height: 325px !important;
+}
+
+ul.footer-menu li {
+    a {
+        img {
+            height: 50px;
+        }
     }
 }

@@ -5,8 +5,8 @@
 			<h3 class="content-ct"><span class="ti-email"></span> Formulaire de contact</h3>
 
 			<?php
-			if(count_chars(do_shortcode( '[contact-form-7 id="12" title="Formulaire de contact 1"]' )) > 0 ){
-				echo do_shortcode( '[contact-form-7 id="12" title="Formulaire de contact 1"]' );
+			if(count_chars(do_shortcode( '[contact-form-7 id="11" title="Formulaire de contact 1"]' )) > 0 ){
+				echo do_shortcode( '[contact-form-7 id="11" title="Formulaire de contact 1"]' );
 			}else{
 			?>
 				<form class="form-horizontal" data-toggle="validator" role="form">
@@ -61,9 +61,18 @@
 		</div>
 		<div class="col-md-6 col-sm-6">
 			<ul class="footer-menu">
-				<li><a href="#">About Us</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-				<li><a href="#">Terms &amp; Condition</a></li>
+				<li><a target="_blank" href="http://www.siliconbanlieue.fr/">
+					<img src="http://hackatown.siliconbanlieue.fr/wp-content/uploads/2016/03/logo_header1-1.png">
+				</a></li>
+				<li><a target="_blank" href="http://www.argenteuil.fr/">
+					<img src="http://hackatown.siliconbanlieue.fr/wp-content/uploads/2016/03/logofooterNew.jpg">
+				</a></li>
+				<li><a target="_blank" href="http://www.rives-de-seine.fr/">
+					<img src="http://hackatown.siliconbanlieue.fr/wp-content/uploads/2016/03/logo-1.png">
+				</a></li>
+				<li><a target="_blank" href="http://monptibot.com/">
+					<img src="http://hackatown.siliconbanlieue.fr/wp-content/uploads/2016/03/profile3.jpg">
+				</a></li>
 			</ul>
 		</div>
 	</div>

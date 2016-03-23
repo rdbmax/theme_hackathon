@@ -36,21 +36,21 @@ get_header(); ?>
 					<span class="dot"></span>
 				</a>
 			</li>
-			<li>
+<!--			<li>
 				<a href="#speakers" class="page-scroll">
-					<span class="menu-title">Les intervenants</span>
+					<span class="menu-title">Coachs et experts</span>
 					<span class="dot"></span>
 				</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="#tickets" class="page-scroll">
-					<span class="menu-title">Buy Tickets</span>
+					<span class="menu-title">Inscription</span>
 					<span class="dot"></span>
 				</a>
 			</li>
 			<li>
 				<a href="#schedule" class="page-scroll">
-					<span class="menu-title">Schedule</span>
+					<span class="menu-title">Planning de l'événement</span>
 					<span class="dot"></span>
 				</a>
 			</li>
@@ -99,31 +99,32 @@ get_header(); ?>
 		</div>
 		<!-- End: Header -->
 	</div>
-	<div class="container">
+	<div class="container whyItsSuperCool">
 		<!-- Start: Desc -->
 		<div class="row me-row content-ct">
-			<h2 class="row-title">Why This Event Is Super Cool?</h2>
+			<h2 class="row-title">Pourquoi ne pas rater cet événement</h2>
 			<div class="col-md-4 feature">
-				<span class="ti-ticket"></span>
-				<h3>Buy Early Bird Tickets</h3>
-				<p>Super cool discounts if you purchase early bird tickets now. Limited tickets available with some awesome perks and goodies!</p>
+				<i class="fi flaticon-signs"></i>
+				<h3>Esprit de compétition</h3>
+				<p><?= just_variable( "motivation1", FALSE ); ?></p>
 			</div>
 			<div class="col-md-4 feature">
-				<span class="ti-microphone"></span>
-				<h3>Expert Speakers</h3>
-				<p>Best in class expert speakers who have extensive knowledge of the topic. All speakers are curated by the panel of experts.</p>
+				<i class="fi flaticon-people"></i>
+				<h3>Travailler en réseau</h3>
+				<p><?= just_variable( "motivation2", FALSE ); ?></p>
 			</div>
 			<div class="col-md-4 feature">
-				<span class="ti-world"></span>
-				<h3>People around the globe!</h3>
-				<p>Meet the people attending this event around the globe. This will be the best opportunity to meet and greet people from your industry.</p>
+				<i class="fi flaticon-technology-1"></i>
+				<h3>Concrétiser une idée</h3>
+				<p><?= just_variable( "motivation3", FALSE ); ?></p>
 			</div>
 		</div>
 		<!-- End: Desc -->
 
 		<!-- Start: Speakers -->
+		<!--
 		<div class="row me-row content-ct speaker" id="speakers">
-			<h2 class="row-title">Les intervenants</h2>
+			<h2 class="row-title">Coachs et experts</h2>
 
 
         <?php
@@ -182,9 +183,13 @@ get_header(); ?>
         // Restore original Post Data
         wp_reset_postdata();
         ?>
-		<!-- End: Speakers -->
+
+		
 	    </div>
+	    -->
+	    <!-- End: Speakers -->
     </div>
+
 
 	<!-- Start: Tickets -->
 	<div class="container-fluid tickets" id="tickets">
@@ -205,9 +210,9 @@ get_header(); ?>
 				<p class="price">Gratuit</p>
 				<p>Réservez votre place pour assister à la remise des prix</p>
 				<?php if( just_variable( 'url eventbrite conference', FALSE ) != ''): ?>
-					<a href="<?php just_variable('url eventbrite conference' ) ?>" class="btn btn-lg btn-red">Commander</a>
+					<a target="_blank" href="<?php just_variable('url eventbrite conference' ) ?>" class="btn btn-lg btn-red">Commander</a>
 				<?php else: ?>
-					<a href="#" class="btn btn-lg btn-red">Rajouter l'eventbrite</a>
+					<a target="_blank" href="#" class="btn btn-lg btn-red">Rajouter l'eventbrite</a>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -264,11 +269,11 @@ get_header(); ?>
                                         ?>
                                         <div class="col-md-6">
                                             <div class="media">
-                                                <div class="media-left">
+                                                <!--<div class="media-left">
                                                     <a href="#">
                                                         <img class="media-object" src="<?php  echo wp_get_attachment_url( get_post_thumbnail_id($post->ID))?>" alt="...">
                                                     </a>
-                                                </div>
+                                                </div>-->
                                                 <div class="media-body">
 													<?php
 													$start = event_timing_get_meta( 'event_timing_start' );
@@ -279,14 +284,14 @@ get_header(); ?>
 													<?php else: ?>
 													<h4 class="media-heading">Pas encore d'horraires</h4>
 													<?php endif; ?>
-
+<!--
 													<?php if(get_the_title()) : ?>
 
 														<h5><?php echo the_title()?></h5>
 													<?php else: ?>
 														<h4 class="media-heading">Pas encore de titre</h4>
 													<?php endif; ?>
-
+-->
 													<?php if(get_the_content()) : ?>
 														<p><?php echo the_content(); ?></p>
 													<?php else: ?>
