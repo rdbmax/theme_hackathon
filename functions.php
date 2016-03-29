@@ -131,10 +131,14 @@ function hackathon_theme_scripts() {
 
 	wp_enqueue_style( 'theme-style', get_template_directory_uri(). '/lib/css/style.css' );
 
+	wp_enqueue_style( 'theme-owl_carousel-style', get_template_directory_uri(). '/lib/css/owl.carousel.css' );
+
 
 	wp_enqueue_script( 'hackathon_theme-jQuery', get_template_directory_uri() . '/lib/js/jquery.js' );
 
     wp_enqueue_script( 'bootstrap-script', get_template_directory_uri(). '/lib/js/bootstrap.js' );
+
+    wp_enqueue_script( 'owl_caoursel-script', get_template_directory_uri(). '/lib/js/owl.carousel.min.js' );
 
     // custom scripts
 
@@ -218,6 +222,7 @@ function speakers_post_type() {
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-businessman',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
@@ -330,6 +335,7 @@ function events_post_type() {
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-calendar-alt',
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
@@ -413,3 +419,102 @@ function custom_custom_form_class_attr( $class ) {
     $class .= ' form-horizontal';
     return $class;
 }
+
+
+// Register Custom Post Type
+function slides_post_type() {
+
+    $labels = array(
+        'name'                  => _x( 'Slides', 'Post Type General Name', 'text_domain' ),
+        'singular_name'         => _x( 'Slide', 'Post Type Singular Name', 'text_domain' ),
+        'menu_name'             => __( 'Slides', 'text_domain' ),
+        'name_admin_bar'        => __( 'Slide', 'text_domain' ),
+        'archives'              => __( 'Item Archives', 'text_domain' ),
+        'parent_item_colon'     => __( 'Parent Slide:', 'text_domain' ),
+        'all_items'             => __( 'All Slides', 'text_domain' ),
+        'add_new_item'          => __( 'Add New Slide', 'text_domain' ),
+        'add_new'               => __( 'New Slide', 'text_domain' ),
+        'new_item'              => __( 'New Item', 'text_domain' ),
+        'edit_item'             => __( 'Edit Slide', 'text_domain' ),
+        'update_item'           => __( 'Update Slide', 'text_domain' ),
+        'view_item'             => __( 'View Slide', 'text_domain' ),
+        'search_items'          => __( 'Search slides', 'text_domain' ),
+        'not_found'             => __( 'No slides found', 'text_domain' ),
+        'not_found_in_trash'    => __( 'No slides found in Trash', 'text_domain' ),
+        'featured_image'        => __( 'Featured Image', 'text_domain' ),
+        'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+        'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+        'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+        'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+        'items_list'            => __( 'Items list', 'text_domain' ),
+        'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+        'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+    );
+    $args = array(
+        'label'                 => __( 'Slide', 'text_domain' ),
+        'description'           => __( 'Slide information pages.', 'text_domain' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title', 'thumbnail' ),
+        'taxonomies'            => array( 'category', 'post_tag' ),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_icon'             => 'dashicons-format-gallery',
+        'menu_position'         => 5,
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => true,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+    );
+    register_post_type( 'slide', $args );
+
+}
+add_action( 'init', 'slides_post_type', 0 );
+
+function ordre_get_meta( $value ) {
+    global $post;
+
+    $field = get_post_meta( $post->ID, $value, true );
+    if ( ! empty( $field ) ) {
+        return is_array( $field ) ? stripslashes_deep( $field ) : stripslashes( wp_kses_decode_entities( $field ) );
+    } else {
+        return false;
+    }
+}
+
+function ordre_add_meta_box() {
+    add_meta_box(
+        'ordre-ordre',
+        __( 'Ordre', 'ordre' ),
+        'ordre_html',
+        'slide',
+        'normal',
+        'default'
+    );
+}
+add_action( 'add_meta_boxes', 'ordre_add_meta_box' );
+
+function ordre_html( $post) {
+    wp_nonce_field( '_ordre_nonce', 'ordre_nonce' ); ?>
+
+    <p>Ordre dans lequel vont apparaitre les sllides</p>
+    <p>
+    <label for="ordre_slide_numero"><?php _e( 'Slide numero', 'ordre' ); ?>: </label><br>
+    <input type="text" name="ordre_slide_numero" id="ordre_slide_numero" value="<?php echo ordre_get_meta( 'ordre_slide_numero' ); ?>">
+    </p><?php
+}
+
+function ordre_save( $post_id ) {
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! isset( $_POST['ordre_nonce'] ) || ! wp_verify_nonce( $_POST['ordre_nonce'], '_ordre_nonce' ) ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+    if ( isset( $_POST['ordre_slide_numero'] ) )
+        update_post_meta( $post_id, 'ordre_slide_numero', esc_attr( $_POST['ordre_slide_numero'] ) );
+}
+add_action( 'save_post', 'ordre_save' );

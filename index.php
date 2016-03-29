@@ -320,6 +320,56 @@ get_header(); ?>
             </div>
         </div>
     </div><!--end schedule -->
+    <div>
+
+        <div class="">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="slides owl-carousel">
+                        <?php
+                        $args = array (
+                            'post_type'              => array( 'slide' ),
+                            'post_status'            => array( 'publish' ),
+                            'meta_query'             => array(
+                                array(
+                                    'key'       => 'ordre_slide_numero',
+                                ),
+                            ),
+                            'order'		=> 'ASC',
+                            'orderby'	=> 'ordre_slide_numero',
+
+                        );
+
+                        // The Query
+                        $query = new WP_Query( $args );
+
+                        // The Loop
+                        if ( $query->have_posts() ) {
+                        ?>
+                        <?php
+                            while ( $query->have_posts() ) {
+                            $query->the_post();
+                        ?>
+                            <div class="slide">
+                                <img src="<?php  echo wp_get_attachment_url( get_post_thumbnail_id($post->ID))?>" alt="<?php the_title() ?>" title="<?php the_title() ?>"/>
+
+                            </div><!-- single slide -->
+
+                        <?php
+                            }
+                        } else {
+                            ?>
+                            Pas de Slides disponible pour cet  évènement, veuillez en ajouter.
+                        <?php
+                        }
+
+                        wp_reset_postdata();
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End slides -->
 
 <?php
 get_footer();
