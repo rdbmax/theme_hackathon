@@ -54,3 +54,17 @@ ul.footer-menu li {
         }
     }
 }
+
+.slides{
+    .slide{
+        background: #DADADA;
+        img{
+            width: 100%;
+            height: auto;
+            float: left;
+        }
+    }
+    .owl-controls{
+        display: none;;
+    }
+}
